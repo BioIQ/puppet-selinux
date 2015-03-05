@@ -8,8 +8,10 @@ class selinux::install {
     ensure => present,
   }
   if $selinux::installmake {
-    package { 'make':
-      ensure => present,
+    if ! defined(Package['make']) {
+      package { 'make':
+        ensure => present,
+      }
     }
   }
 }
